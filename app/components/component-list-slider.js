@@ -8,6 +8,8 @@ import cx from 'classnames'
 import shallowEqual from 'shallowequal'
 
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import StepBar from './StepBar'
+import StepFooter from './StepFooter'
 if (typeof window !== 'undefined') require('react-perfect-scrollbar/dist/css/styles.css')
 
 const delayedSideEffect = setTimeout // basically put the side effect on the process queue and do it later
@@ -141,6 +143,12 @@ export const ComponentListSlider = props => {
             </div>
           ))}
       </div>
+      <StepFooter
+        onNext={() => dispatch({ type: 'increment' })}
+        onBack={() => dispatch({ type: 'decrement' })}
+        disableNext={!clonedChildren[state.currentStep].props.valid}
+        disableBack={state.currentStep === 0}
+      />
     </div>
   )
 }
